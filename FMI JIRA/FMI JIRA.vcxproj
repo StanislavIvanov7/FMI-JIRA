@@ -143,14 +143,18 @@
     </Manifest>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Source\Models\Users\Lecturer.cpp" />
     <ClCompile Include="Source\Exceptions\JiraDateFormatException.cpp" />
     <ClCompile Include="Source\Utils\Date.cpp" />
     <ClCompile Include="Source\Exceptions\JiraInvalidArgumentException.cpp" />
     <ClCompile Include="Source\Exceptions\AppException.cpp" />
     <ClCompile Include="FMI JIRA.cpp" />
     <ClCompile Include="Source\Models\Users\User.cpp" />
+    <ClCompile Include="Source\Models\Users\Student.cpp" />
+    <ClCompile Include="Source\Models\Users\TeachingAssistant.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Source\Models\Users\Lecturer.h" />
     <ClInclude Include="Source\Exceptions\JiraDateFormatException.h" />
     <ClInclude Include="Source\Utils\Date.h" />
     <ClInclude Include="Source\Exceptions\JiraInvalidArgumentException.h" />
@@ -162,6 +166,8 @@
     <ClInclude Include="Source\Utils\Enums\TaskType.h" />
     <ClInclude Include="Source\Utils\Enums\UserRole.h" />
     <ClInclude Include="Source\Models\Users\User.h" />
+    <ClInclude Include="Source\Models\Users\Student.h" />
+    <ClInclude Include="Source\Models\Users\TeachingAssistant.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
