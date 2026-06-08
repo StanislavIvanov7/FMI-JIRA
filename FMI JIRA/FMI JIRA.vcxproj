@@ -143,6 +143,8 @@
     </Manifest>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Source\Exceptions\JiraStateException.cpp" />
+    <ClCompile Include="Source\Models\Users\Administrator.cpp" />
     <ClCompile Include="Source\Models\Users\Lecturer.cpp" />
     <ClCompile Include="Source\Exceptions\JiraDateFormatException.cpp" />
     <ClCompile Include="Source\Utils\Date.cpp" />
@@ -154,6 +156,8 @@
     <ClCompile Include="Source\Models\Users\TeachingAssistant.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Source\Exceptions\JiraStateException.h" />
+    <ClInclude Include="Source\Models\Users\Administrator.h" />
     <ClInclude Include="Source\Models\Users\Lecturer.h" />
     <ClInclude Include="Source\Exceptions\JiraDateFormatException.h" />
     <ClInclude Include="Source\Utils\Date.h" />
