@@ -111,6 +111,7 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
+      <AdditionalIncludeDirectories>$(ProjectDir)Source;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -139,7 +140,19 @@
     </Manifest>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Source\Exceptions\JiraInvalidArgumentException.cpp" />
+    <ClCompile Include="Source\Exceptions\AppException.cpp" />
     <ClCompile Include="FMI JIRA.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Source\Exceptions\JiraInvalidArgumentException.h" />
+    <ClInclude Include="Source\Exceptions\AppException.h" />
+    <ClInclude Include="Source\Utils\Enums\ProjectStatus.h" />
+    <ClInclude Include="Source\Utils\Enums\StageStatus.h" />
+    <ClInclude Include="Source\Utils\Enums\TaskPriority.h" />
+    <ClInclude Include="Source\Utils\Enums\TaskStatus.h" />
+    <ClInclude Include="Source\Utils\Enums\TaskType.h" />
+    <ClInclude Include="Source\Utils\Enums\UserRole.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
