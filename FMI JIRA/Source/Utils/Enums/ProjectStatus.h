@@ -14,12 +14,12 @@ namespace ProjectStatusConstants {
     constexpr std::string_view ERROR_INVALID_STATUS = "Unknown Project Status requested: ";
 }
 
-inline std::string to_string(ProjectStatus status) {
+inline std::string toString(ProjectStatus status) {
     return (status == ProjectStatus::Active) ?
         std::string(ProjectStatusConstants::ACTIVE) : std::string(ProjectStatusConstants::FINISHED);
 }
 
-inline ProjectStatus parse_project_status(const std::string& str) {
+inline ProjectStatus parseProjectStatus(const std::string& str) {
     if (str == ProjectStatusConstants::ACTIVE)   return ProjectStatus::Active;
     if (str == ProjectStatusConstants::FINISHED) return ProjectStatus::Finished;
 

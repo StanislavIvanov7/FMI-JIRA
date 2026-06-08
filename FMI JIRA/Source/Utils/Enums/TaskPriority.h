@@ -19,7 +19,7 @@ namespace TaskPriorityConstants {
     constexpr std::string_view ERROR_INVALID_PRIORITY = "Unknown Task Priority requested: ";
 }
 
-inline std::string to_string(TaskPriority priority) {
+inline std::string toString(TaskPriority priority) {
     switch (priority) {
     case TaskPriority::Low:      return std::string(TaskPriorityConstants::LOW);
     case TaskPriority::Medium:   return std::string(TaskPriorityConstants::MEDIUM);
@@ -29,7 +29,7 @@ inline std::string to_string(TaskPriority priority) {
     return std::string(TaskPriorityConstants::UNKNOWN);
 }
 
-inline TaskPriority parse_task_priority(const std::string& str) {
+inline TaskPriority parseTaskPriority(const std::string& str) {
     if (str == TaskPriorityConstants::LOW)      return TaskPriority::Low;
     if (str == TaskPriorityConstants::MEDIUM)   return TaskPriority::Medium;
     if (str == TaskPriorityConstants::HIGH)     return TaskPriority::High;

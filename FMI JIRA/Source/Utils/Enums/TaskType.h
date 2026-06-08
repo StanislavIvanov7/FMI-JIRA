@@ -20,7 +20,7 @@ namespace TaskTypeConstants {
     constexpr std::string_view ERROR_INVALID_TYPE = "Unknown Task Type requested: ";
 }
 
-inline std::string to_string(TaskType type) {
+inline std::string toString(TaskType type) {
     switch (type) {
     case TaskType::Bug:         return std::string(TaskTypeConstants::BUG);
     case TaskType::Feature:     return std::string(TaskTypeConstants::FEATURE);
@@ -30,7 +30,7 @@ inline std::string to_string(TaskType type) {
     return std::string(TaskTypeConstants::UNKNOWN);
 }
 
-inline TaskType parse_task_type(const std::string& str) {
+inline TaskType parseTaskType(const std::string& str) {
     if (str == TaskTypeConstants::BUG)         return TaskType::Bug;
     if (str == TaskTypeConstants::FEATURE)     return TaskType::Feature;
     if (str == TaskTypeConstants::TASK)        return TaskType::Task;

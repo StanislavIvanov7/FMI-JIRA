@@ -27,9 +27,9 @@ inline std::string to_string(StageStatus status) {
 }
 
 inline StageStatus parse_stage_status(const std::string& str) {
-    if (str == "Planned" || str == StageStatusConstants::PLANNED) return StageStatus::Planned;
-    if (str == "Active" || str == StageStatusConstants::ACTIVE)  return StageStatus::Active;
-    if (str == "Finished" || str == StageStatusConstants::FINISHED)return StageStatus::Finished;
+    if (str == StageStatusConstants::PLANNED || str == StageStatusConstants::PLANNED) return StageStatus::Planned;
+    if (str == StageStatusConstants::ACTIVE || str == StageStatusConstants::ACTIVE)  return StageStatus::Active;
+    if (str == StageStatusConstants::FINISHED || str == StageStatusConstants::FINISHED)return StageStatus::Finished;
 
     throw JiraInvalidArgumentException(std::string(StageStatusConstants::ERROR_INVALID_STATUS) + str);
 }

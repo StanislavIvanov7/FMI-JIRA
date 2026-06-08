@@ -19,7 +19,7 @@ namespace UserRoleConstants {
     constexpr std::string_view ERROR_INVALID_ROLE = "Unknown User Role requested: ";
 }
 
-inline std::string to_string(UserRole role) {
+inline std::string toString(UserRole role) {
     switch (role) {
     case UserRole::Student:           return std::string(UserRoleConstants::STUDENT);
     case UserRole::TeachingAssistant: return std::string(UserRoleConstants::TEACHING_ASSISTANT);
@@ -29,7 +29,7 @@ inline std::string to_string(UserRole role) {
     return std::string(UserRoleConstants::UNKNOWN);
 }
 
-inline UserRole parse_role(const std::string& str) {
+inline UserRole parseRole(const std::string& str) {
     if (str == UserRoleConstants::STUDENT) return UserRole::Student;
     if (str == UserRoleConstants::TEACHING_ASSISTANT)      return UserRole::TeachingAssistant;
     if (str == UserRoleConstants::LECTURER) return UserRole::Lecturer;

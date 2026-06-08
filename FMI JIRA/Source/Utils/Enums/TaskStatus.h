@@ -19,7 +19,7 @@ namespace TaskStatusConstants {
     constexpr std::string_view ERROR_INVALID_STATUS = "Unknown Task Status requested: ";
 }
 
-inline std::string to_string(TaskStatus status) {
+inline std::string toString(TaskStatus status) {
     switch (status) {
     case TaskStatus::ToDo:       return std::string(TaskStatusConstants::TODO);
     case TaskStatus::InProgress: return std::string(TaskStatusConstants::IN_PROGRESS);
@@ -29,7 +29,7 @@ inline std::string to_string(TaskStatus status) {
     return std::string(TaskStatusConstants::UNKNOWN);
 }
 
-inline TaskStatus parse_task_status(const std::string& str) {
+inline TaskStatus parseTaskStatus(const std::string& str) {
     if (str == TaskStatusConstants::TODO)        return TaskStatus::ToDo;
     if (str == TaskStatusConstants::IN_PROGRESS) return TaskStatus::InProgress;
     if (str == TaskStatusConstants::IN_REVIEW)   return TaskStatus::InReview;

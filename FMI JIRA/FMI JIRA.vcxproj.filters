@@ -30,6 +30,9 @@
     <ClCompile Include="Source\Exceptions\JiraDateFormatException.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Models\Users\User.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Utils\Enums\UserRole.h">
@@ -60,6 +63,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\Exceptions\JiraDateFormatException.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Models\Users\User.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

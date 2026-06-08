@@ -148,6 +148,7 @@
     <ClCompile Include="Source\Exceptions\JiraInvalidArgumentException.cpp" />
     <ClCompile Include="Source\Exceptions\AppException.cpp" />
     <ClCompile Include="FMI JIRA.cpp" />
+    <ClCompile Include="Source\Models\Users\User.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Exceptions\JiraDateFormatException.h" />
@@ -160,6 +161,7 @@
     <ClInclude Include="Source\Utils\Enums\TaskStatus.h" />
     <ClInclude Include="Source\Utils\Enums\TaskType.h" />
     <ClInclude Include="Source\Utils\Enums\UserRole.h" />
+    <ClInclude Include="Source\Models\Users\User.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
