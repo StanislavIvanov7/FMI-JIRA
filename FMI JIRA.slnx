@@ -3,5 +3,5 @@
     <Platform Name="x64" />
     <Platform Name="x86" />
   </Configurations>
-  <Project Path="FMI JIRA/FMI JIRA.vcxproj" />
+  <Project Path="FMI JIRA/FMI JIRA.vcxproj" Id="24ffd87d-dfca-49c2-9d83-649a927b979e" />
 </Solution>

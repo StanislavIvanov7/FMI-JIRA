@@ -143,6 +143,8 @@
     </Manifest>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Source\Models\Task\HistoryEntry.cpp" />
+    <ClCompile Include="Source\Models\Comments\Comment.cpp" />
     <ClCompile Include="Source\Exceptions\JiraStateException.cpp" />
     <ClCompile Include="Source\Models\Users\Administrator.cpp" />
     <ClCompile Include="Source\Models\Users\Lecturer.cpp" />
@@ -154,8 +156,11 @@
     <ClCompile Include="Source\Models\Users\User.cpp" />
     <ClCompile Include="Source\Models\Users\Student.cpp" />
     <ClCompile Include="Source\Models\Users\TeachingAssistant.cpp" />
+    <ClCompile Include="Source\Models\Task\Task.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Source\Models\Task\HistoryEntry.h" />
+    <ClInclude Include="Source\Models\Comments\Comment.h" />
     <ClInclude Include="Source\Exceptions\JiraStateException.h" />
     <ClInclude Include="Source\Models\Users\Administrator.h" />
     <ClInclude Include="Source\Models\Users\Lecturer.h" />
@@ -172,6 +177,7 @@
     <ClInclude Include="Source\Models\Users\User.h" />
     <ClInclude Include="Source\Models\Users\Student.h" />
     <ClInclude Include="Source\Models\Users\TeachingAssistant.h" />
+    <ClInclude Include="Source\Models\Task\Task.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
