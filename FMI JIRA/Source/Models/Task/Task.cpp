@@ -7,7 +7,7 @@
 size_t Task::idGen = 100;
 
 Task::Task(const std::string& title, const std::string& description, TaskType type, TaskPriority priority)
-	: id(++idGen), title(std::move(title)), description(std::move(description)),
+	: id(++idGen), title(title), description(description),
 	type(type), priority(priority), status(TaskStatus::ToDo), deadline(Date()) {
 
 	if (this->title.empty()) throw JiraInvalidArgumentException(std::string(TaskConstants::ERROR_EMPTY_TITLE));
@@ -19,10 +19,10 @@ Task::Task(size_t id, const std::string& title, const std::string& description,
 	const User* assignee, const Date& deadline, int points,
 	double grade, bool approved, std::vector<Comment> comments,
 	std::vector<std::string> tags, std::vector<HistoryEntry> changeHistory)
-	: id(id), title(std::move(title)), description(std::move(description)),
+	: id(id), title(title), description(description),
 	type(type), priority(priority), status(status), assignee(assignee), deadline(deadline),
 	points(points), grade(grade), approved(approved),
-	comments(std::move(comments)), tags(std::move(tags)), changeHistory(std::move(changeHistory)) {
+	comments(comments), tags(tags), changeHistory(changeHistory) {
 }
 
 size_t Task::getId() const {
@@ -89,14 +89,14 @@ void Task::setTitle(const std::string& newTitle, const User* changedBy, const Da
 	if (newTitle.empty()) throw JiraInvalidArgumentException(std::string(TaskConstants::ERROR_EMPTY_TITLE));
 
 	changeHistory.emplace_back(changedBy, std::string(TaskConstants::FIELD_TITLE), title, newTitle, timestamp);
-	title = std::move(newTitle);
+	title = newTitle;
 }
 
 void Task::setDescription(const std::string& newDescription, const User* changedBy, const Date& timestamp) {
 	if (newDescription.empty()) throw JiraInvalidArgumentException(std::string(TaskConstants::ERROR_EMPTY_DESCRIPTION));
 
 	changeHistory.emplace_back(changedBy, std::string(TaskConstants::FIELD_DESCRIPTION), description, newDescription, timestamp);
-	description = std::move(newDescription);
+	description = newDescription;
 }
 
 void Task::setPriority(TaskPriority newPriority, const User* changedBy, const Date& timestamp) {
@@ -137,13 +137,12 @@ void Task::setGrade(double newGrade, const User* changedBy, const Date& timestam
 }
 
 void Task::setApproved(bool newApproved, const User* changedBy, const Date& timestamp) {
-	std::string oldApproved = approved ? std::string(TaskConstants::VALUE_TRUE) : std::string(TaskConstants::VALUE_FALSE);
-	std::string newApproved = newApproved ? std::string(TaskConstants::VALUE_TRUE) : std::string(TaskConstants::VALUE_FALSE);
+	std::string oldApprovedStr = this->approved ? std::string(TaskConstants::VALUE_TRUE) : std::string(TaskConstants::VALUE_FALSE);
+	std::string newApprovedStr = newApproved ? std::string(TaskConstants::VALUE_TRUE) : std::string(TaskConstants::VALUE_FALSE);
 
-	changeHistory.emplace_back(changedBy, std::string(TaskConstants::FIELD_APPROVED), oldApproved, newApproved, timestamp);
-	approved = newApproved;
+	changeHistory.emplace_back(changedBy, std::string(TaskConstants::FIELD_APPROVED), oldApprovedStr, newApprovedStr, timestamp);
+	this->approved = newApproved;
 }
-
 void Task::addComment(const Comment& comment) {
 	comments.push_back(comment);
 }

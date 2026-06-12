@@ -8,8 +8,8 @@ HistoryEntry::HistoryEntry(const User* changedBy,
 	const std::string& oldValue,
 	const std::string& newValue,
 	const Date& timestamp) 
-	: changedBy(changedBy),field(std::move(field)),
-	oldValue(std::move(oldValue)),newValue(std::move(newValue)),
+	: changedBy(changedBy),field(field),
+	oldValue(oldValue),newValue(newValue),
 	timestamp(timestamp) {
 
 	

@@ -4,7 +4,7 @@
 #include <format>
 
 Comment::Comment(const User* author, const std::string& content, const Date& date)
-	: author(author), content(std::move(content)), creationDate(date) {
+	: author(author), content(content), creationDate(date) {
 
 	if (!this->author) {
 		throw JiraInvalidArgumentException(std::string(CommentConstants::ERROR_NULL_AUTHOR));
