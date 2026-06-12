@@ -2,12 +2,10 @@
 #include "Exceptions/JiraInvalidArgumentException.h"
 
 Student::Student(const std::string& username, const std::string& password, const std::string& facultyNumber)
-    : User(username, password, UserRole::Student)
+    : User(username, password, UserRole::Student),
+    facultyNumber(validateFacultyNumber(facultyNumber))
 {
-    if (facultyNumber.empty()) {
-        throw JiraInvalidArgumentException(std::string(StudentConstants::ERROR_EMPTY_FACULTY_NUMBER));
-    }
-    this->facultyNumber = facultyNumber;
+  
 }
 
 std::unique_ptr<User> Student::clone() const {
@@ -57,4 +55,11 @@ void Student::displayInfo(std::ostream& os) const {
         << " | Completed tasks: " << completedTasks
         << " | In progress: " << inProgressTasks
         << " | Performance score: " << performanceScore;
+}
+
+const std::string& Student::validateFacultyNumber(const std::string& fn) {
+    if (fn.empty()) {
+        throw JiraInvalidArgumentException(std::string(StudentConstants::ERROR_EMPTY_FACULTY_NUMBER));
+    }
+    return fn;
 }

@@ -18,6 +18,8 @@ private:
     int inProgressTasks = StudentConstants::INITIAL_COUNTER_VALUE;
     double performanceScore = StudentConstants::INITIAL_SCORE_VALUE;
 
+    static const std::string& validateFacultyNumber(const std::string& fn);
+
 public:
 
     Student(const std::string& username, const std::string& password, const std::string& facultyNumber);

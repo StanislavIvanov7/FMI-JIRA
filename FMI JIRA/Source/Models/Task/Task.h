@@ -25,6 +25,22 @@ namespace TaskConstants {
     constexpr int INITIAL_POINTS = 0;
     constexpr double INITIAL_GRADE = 2.0;
     constexpr bool INITIAL_APPROVED_STATUS = false;
+
+    constexpr std::string_view FIELD_TITLE = "Title";
+    constexpr std::string_view FIELD_DESCRIPTION = "Description";
+    constexpr std::string_view FIELD_PRIORITY = "Priority";
+    constexpr std::string_view FIELD_STATUS = "Status";
+    constexpr std::string_view FIELD_ASSIGNEE = "Assignee";
+    constexpr std::string_view FIELD_DEADLINE = "Deadline";
+    constexpr std::string_view FIELD_POINTS = "Points";
+    constexpr std::string_view FIELD_GRADE = "Grade";
+    constexpr std::string_view FIELD_APPROVED = "Approved";
+    constexpr std::string_view FIELD_TAG_ADDED = "Tag Added";
+
+    constexpr std::string_view VALUE_UNASSIGNED = "Unassigned";
+    constexpr std::string_view VALUE_TRUE = "True";
+    constexpr std::string_view VALUE_FALSE = "False";
+    constexpr std::string_view VALUE_NONE = "";
 }
 
 class Task {
@@ -70,12 +86,13 @@ public:
     int getPoints() const;
     double getGrade() const;
     bool isApproved() const;
+
     const std::vector<Comment>& getComments() const;
     const std::vector<std::string>& getTags() const;
     const std::vector<HistoryEntry>& getChangeHistory() const;
 
-    void setTitle(const std::string& title, const User* changedBy, const Date& timestamp);
-    void setDescription(const std::string& description, const User* changedBy, const Date& timestamp);
+    void setTitle(const std::string& newTitle, const User* changedBy, const Date& timestamp);
+    void setDescription(const std::string& newDescription, const User* changedBy, const Date& timestamp);
     void setPriority(TaskPriority priority, const User* changedBy, const Date& timestamp);
     void setStatus(TaskStatus status, const User* changedBy, const Date& timestamp);
     void setAssignee(const User* user, const User* changedBy, const Date& timestamp);
@@ -87,8 +104,8 @@ public:
     void addComment(const Comment& comment);
     void addTag(const std::string& tag, const User* changedBy, const Date& timestamp);
 
-    void save(std::ostream& os) const;
-    static std::unique_ptr<Task> load(std::istream& is, const AppData& context);
+  /*  void save(std::ostream& os) const;
+    static std::unique_ptr<Task> load(std::istream& is, const AppData& context);*/
 
 
     friend std::ostream& operator<<(std::ostream& os, const Task& task);

@@ -17,7 +17,7 @@ namespace StageStatusConstants {
     constexpr std::string_view ERROR_INVALID_STATUS = "Unknown Stage Status requested: ";
 }
 
-inline std::string to_string(StageStatus status) {
+inline std::string toString(StageStatus status) {
     switch (status) {
     case StageStatus::Planned:  return std::string(StageStatusConstants::PLANNED);
     case StageStatus::Active:   return std::string(StageStatusConstants::ACTIVE);
@@ -26,10 +26,10 @@ inline std::string to_string(StageStatus status) {
     return std::string(StageStatusConstants::UNKNOWN);
 }
 
-inline StageStatus parse_stage_status(const std::string& str) {
-    if (str == StageStatusConstants::PLANNED || str == StageStatusConstants::PLANNED) return StageStatus::Planned;
-    if (str == StageStatusConstants::ACTIVE || str == StageStatusConstants::ACTIVE)  return StageStatus::Active;
-    if (str == StageStatusConstants::FINISHED || str == StageStatusConstants::FINISHED)return StageStatus::Finished;
+inline StageStatus parseStageStatus(const std::string& str) {
+    if (str == StageStatusConstants::PLANNED) return StageStatus::Planned;
+    if (str == StageStatusConstants::ACTIVE)  return StageStatus::Active;
+    if (str == StageStatusConstants::FINISHED) return StageStatus::Finished;
 
     throw JiraInvalidArgumentException(std::string(StageStatusConstants::ERROR_INVALID_STATUS) + str);
 }
