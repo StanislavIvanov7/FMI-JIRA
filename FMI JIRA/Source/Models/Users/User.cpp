@@ -17,6 +17,21 @@ User::User(const std::string& username, const std::string& password, UserRole ro
     this->password = password;
 }
 
+User::User(size_t id, const std::string& username, const std::string& password, UserRole role)
+    : id(id), username(username), password(password), role(role)
+{
+    if (username.empty()) {
+        throw JiraInvalidArgumentException(std::string(UserConstants::ERROR_EMPTY_USERNAME));
+    }
+    if (password.empty()) {
+        throw JiraInvalidArgumentException(std::string(UserConstants::ERROR_EMPTY_PASSWORD));
+    }
+
+    if (id >= idCounter) {
+        idCounter = id + 1;
+    }
+}
+
 size_t User::getId() const {
     return id; 
 }

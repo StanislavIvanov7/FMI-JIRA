@@ -1,5 +1,9 @@
 #include "Lecturer.h"
 
+Lecturer::Lecturer(size_t id, const std::string& username, const std::string& password)
+    : User(id, username, password, UserRole::Lecturer) {
+}
+
 Lecturer::Lecturer(const std::string& username, const std::string& password)
     : User(username, password, UserRole::Lecturer) {
 } 

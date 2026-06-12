@@ -5,6 +5,7 @@
 #include <memory>
 #include <iostream>
 #include <string_view>
+#include <optional>
 
 #include "Utils/Enums/TaskType.h"
 #include "Utils/Date.h"
@@ -23,7 +24,6 @@ namespace TaskConstants {
     constexpr std::string_view ERROR_INVALID_GRADE = "Task grade must be between 2.0 and 6.0.";
 
     constexpr int INITIAL_POINTS = 0;
-    constexpr double INITIAL_GRADE = 2.0;
     constexpr bool INITIAL_APPROVED_STATUS = false;
 
     constexpr std::string_view FIELD_TITLE = "Title";
@@ -56,7 +56,7 @@ private:
     const User* assignee = nullptr;
     Date deadline;
     int points = TaskConstants::INITIAL_POINTS;
-    double grade = TaskConstants::INITIAL_GRADE;
+    std::optional<double> grade = std::nullopt;
     bool approved = TaskConstants::INITIAL_APPROVED_STATUS;
 
     std::vector<Comment> comments;
@@ -64,12 +64,12 @@ private:
     std::vector<HistoryEntry> changeHistory;
 
 public:
-    Task(const std::string& title, const std::string& description, TaskType type, TaskPriority priority);
-
+    Task(const std::string& title, const std::string& description, TaskType type, TaskPriority priority, const Date& deadline);
+    
     Task(size_t id, const std::string& title, const std::string& description,
         TaskType type, TaskPriority priority, TaskStatus status,
         const User* assignee, const Date& deadline, int points,
-        double grade, bool approved, std::vector<Comment> comments,
+        std::optional<double> grade, bool approved, std::vector<Comment> comments,
         std::vector<std::string> tags, std::vector<HistoryEntry> changeHistory);
 
     Task() = default;
@@ -84,7 +84,7 @@ public:
     const User* getAssignee() const;
     const Date& getDeadline() const;
     int getPoints() const;
-    double getGrade() const;
+    std::optional<double> getGrade() const;
     bool isApproved() const;
 
     const std::vector<Comment>& getComments() const;

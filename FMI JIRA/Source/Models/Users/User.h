@@ -24,7 +24,7 @@ class User
         UserRole role;
 
     public:
-        
+        User(size_t id, const std::string& username, const std::string& password, UserRole role);
         User(const std::string& username, const std::string& password, UserRole role);
     
         size_t getId() const;

@@ -9,6 +9,7 @@ namespace AdminConstants {
 
 class Administrator : public User {
 private:
+    Administrator(size_t id, const std::string& username, const std::string& password);
     Administrator(const std::string& username, const std::string& password);
 
 public:

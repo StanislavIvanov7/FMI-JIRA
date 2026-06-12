@@ -159,6 +159,8 @@
     <ClCompile Include="Source\Models\Users\TeachingAssistant.cpp" />
     <ClCompile Include="Source\Models\Task\Task.cpp" />
     <ClCompile Include="Source\Models\Stage\Stage.cpp" />
+    <ClCompile Include="Source\Factories\UserFactory.cpp" />
+    <ClCompile Include="Source\Factories\TaskFactory.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Models\Project\Project.h" />
@@ -182,6 +184,8 @@
     <ClInclude Include="Source\Models\Users\TeachingAssistant.h" />
     <ClInclude Include="Source\Models\Task\Task.h" />
     <ClInclude Include="Source\Models\Stage\Stage.h" />
+    <ClInclude Include="Source\Factories\UserFactory.h" />
+    <ClInclude Include="Source\Factories\TaskFactory.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

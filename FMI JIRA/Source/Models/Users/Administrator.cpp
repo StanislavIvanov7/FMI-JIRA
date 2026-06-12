@@ -1,5 +1,10 @@
 #include "Administrator.h"
 #include "Exceptions/JiraStateException.h"
+
+Administrator::Administrator(size_t id, const std::string& username, const std::string& password)
+    : User(id, username, password, UserRole::Administrator) {
+}
+
 Administrator::Administrator(const std::string& username, const std::string& password)
     : User(username, password, UserRole::Administrator) { }
 
