@@ -67,18 +67,6 @@ int Date::getYear() const {
 	return year;
 }
 
-auto Date::operator<=>(const Date& other) const
-{
-	if (auto cmp = year <=> other.year; cmp != 0) return cmp;
-	if (auto cmp = month <=> other.month; cmp != 0) return cmp;
-	return day <=> other.day;
-}
-
-bool Date::operator==(const Date& other) const {
-	return year == other.year && month == other.month && day == other.day;
-}
-
-
 std::string Date::toString() const {
 	return std::format(DateConstants::DATE_FORMAT_TEMPLATE, day, month, year);
 }

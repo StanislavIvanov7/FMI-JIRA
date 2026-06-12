@@ -50,9 +50,9 @@ namespace DateConstants {
 
 class Date {
 private:
-    int day = DateConstants::MIN_VALID_DAY;
-    int month = DateConstants::MIN_VALID_MONTH;
     int year = DateConstants::DEFAULT_SYSTEM_YEAR;
+    int month = DateConstants::MIN_VALID_MONTH;
+    int day = DateConstants::MIN_VALID_DAY;
 
     static bool isLeapYear(int y);
     static bool isValidDate(int d, int m, int y);
@@ -70,8 +70,8 @@ public:
     int getMonth() const;
     int getYear() const;
 
-    auto operator<=>(const Date& other) const; 
-    bool operator==(const Date& other) const;
+    auto operator<=>(const Date& other) const = default; 
+    bool operator==(const Date& other) const = default;
 
     std::string toString() const;
     static Date parse(const std::string& str);

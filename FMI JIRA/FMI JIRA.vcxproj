@@ -157,6 +157,7 @@
     <ClCompile Include="Source\Models\Users\Student.cpp" />
     <ClCompile Include="Source\Models\Users\TeachingAssistant.cpp" />
     <ClCompile Include="Source\Models\Task\Task.cpp" />
+    <ClCompile Include="Source\Models\Stage\Stage.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Models\Task\HistoryEntry.h" />
@@ -178,6 +179,7 @@
     <ClInclude Include="Source\Models\Users\Student.h" />
     <ClInclude Include="Source\Models\Users\TeachingAssistant.h" />
     <ClInclude Include="Source\Models\Task\Task.h" />
+    <ClInclude Include="Source\Models\Stage\Stage.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
