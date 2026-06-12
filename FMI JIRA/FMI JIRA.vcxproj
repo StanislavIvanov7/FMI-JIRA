@@ -143,6 +143,7 @@
     </Manifest>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Source\Models\Project\Project.cpp" />
     <ClCompile Include="Source\Models\Task\HistoryEntry.cpp" />
     <ClCompile Include="Source\Models\Comments\Comment.cpp" />
     <ClCompile Include="Source\Exceptions\JiraStateException.cpp" />
@@ -160,6 +161,7 @@
     <ClCompile Include="Source\Models\Stage\Stage.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Source\Models\Project\Project.h" />
     <ClInclude Include="Source\Models\Task\HistoryEntry.h" />
     <ClInclude Include="Source\Models\Comments\Comment.h" />
     <ClInclude Include="Source\Exceptions\JiraStateException.h" />
