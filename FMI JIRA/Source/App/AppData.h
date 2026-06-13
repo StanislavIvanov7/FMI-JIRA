@@ -1,0 +1,39 @@
+#pragma once
+#include <vector>
+#include <memory>
+#include <string>
+#include <optional>
+
+class User;
+class Project;
+
+class AppData {
+private:
+	std::vector<std::unique_ptr<User>> users;
+	std::vector<std::shared_ptr<Project>> projects;
+
+	User* currentUser = nullptr;
+	bool running = true;
+
+public:
+	AppData() = default;
+
+	AppData(const AppData&) = delete;
+	AppData& operator=(const AppData&) = delete;
+
+	bool isRunning() const;
+	void stop();
+
+	void addUser(std::unique_ptr<User> user);
+	User* findUser(const std::string& username) const;
+
+
+	void setCurrentUser(User* user);
+	User* getCurrentUser() const;
+	bool isUserLoggedIn() const;
+	void logout();
+
+	void addProject(std::shared_ptr<Project> project);
+	Project* findProject(const std::string& name) const;
+	const std::vector<std::shared_ptr<Project>>& getProjects() const;
+};
