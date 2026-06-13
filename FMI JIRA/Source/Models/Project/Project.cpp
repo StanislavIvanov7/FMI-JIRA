@@ -36,6 +36,11 @@ const std::vector<Stage>& Project::getStages() const {
     return stages;
 }
 
+std::vector<Stage>& Project::getStages()
+{
+    return stages;
+}
+
 void Project::setDescription(const std::string& newDescription) {
     description = newDescription;
 }

@@ -43,6 +43,7 @@ public:
 	const std::vector<User*>& getMembers() const;
 	const std::vector<std::shared_ptr<Task>>& getTasks() const;
 	const std::vector<Stage>& getStages() const;
+	std::vector<Stage>& getStages();
 
 	void setDescription(const std::string& description);
 	void setStatus(ProjectStatus status);
