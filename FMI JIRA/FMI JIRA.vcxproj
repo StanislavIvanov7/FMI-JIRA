@@ -143,6 +143,10 @@
     </Manifest>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Source\Commands\Common\CloseCommand.cpp" />
+    <ClCompile Include="Source\Commands\Common\HelpCommand.cpp" />
+    <ClCompile Include="Source\Commands\Common\LogoutCommand.cpp" />
+    <ClCompile Include="Source\Commands\Common\LoginCommand.cpp" />
     <ClCompile Include="Source\App\AppData.cpp" />
     <ClCompile Include="Source\Commands\Base\Command.cpp" />
     <ClCompile Include="Source\Models\Project\Project.cpp" />
@@ -163,8 +167,13 @@
     <ClCompile Include="Source\Models\Stage\Stage.cpp" />
     <ClCompile Include="Source\Factories\UserFactory.cpp" />
     <ClCompile Include="Source\Factories\TaskFactory.cpp" />
+    <ClCompile Include="Source\Commands\Common\ViewProfileCommand.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Source\Commands\Common\CloseCommand.h" />
+    <ClInclude Include="Source\Commands\Common\HelpCommand.h" />
+    <ClInclude Include="Source\Commands\Common\LogoutCommand.h" />
+    <ClInclude Include="Source\Commands\Common\LoginCommand.h" />
     <ClInclude Include="Source\App\AppData.h" />
     <ClInclude Include="Source\Commands\Base\Command.h" />
     <ClInclude Include="Source\Models\Project\Project.h" />
@@ -190,6 +199,7 @@
     <ClInclude Include="Source\Models\Stage\Stage.h" />
     <ClInclude Include="Source\Factories\UserFactory.h" />
     <ClInclude Include="Source\Factories\TaskFactory.h" />
+    <ClInclude Include="Source\Commands\Common\ViewProfileCommand.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

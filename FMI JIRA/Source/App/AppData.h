@@ -27,7 +27,6 @@ public:
 	void addUser(std::unique_ptr<User> user);
 	User* findUser(const std::string& username) const;
 
-
 	void setCurrentUser(User* user);
 	User* getCurrentUser() const;
 	bool isUserLoggedIn() const;
