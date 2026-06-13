@@ -2,8 +2,8 @@
 #include <memory>
 #include <string>
 #include "Utils/Enums/UserRole.h" 
-
-class User;
+#include "Models/Users/User.h"
+#include <string_view>
 
 namespace UserFactoryConstants {
     constexpr std::string_view ERROR_INVALID_CREATE_ROLE = "Invalid or unknown role passed to UserFactory::createUser.";
@@ -27,6 +27,9 @@ public:
         const std::string& username,
         const std::string& password,
         UserRole role,
-        const std::string& facultyNumber = ""
+        const std::string& facultyNumber = "",
+        int completedTasks = 0,        
+        int inProgressTasks = 0,        
+        double performanceScore = 0.0
     );
 };

@@ -1,4 +1,5 @@
 #include "Date.h"
+#include <chrono>
 #include "Exceptions/JiraInvalidArgumentException.h"
 #include "Exceptions/JiraDateFormatException.h"
 #include<format>
@@ -42,18 +43,23 @@ int Date::toAbsoluteDays() const {
 }
 
 
-Date::Date() : day(DateConstants::MIN_VALID_DAY),
-month(DateConstants::MIN_VALID_MONTH),
-year(DateConstants::DEFAULT_SYSTEM_YEAR) {
+Date::Date() {
+	auto now = std::chrono::system_clock::now();
+	auto current_days = std::chrono::floor<std::chrono::days>(now);
+	std::chrono::year_month_day ymd{ current_days };
+
+	this->year = static_cast<int>(ymd.year());
+	this->month = static_cast<int>(unsigned(ymd.month()));
+	this->day = static_cast<int>(unsigned(ymd.day()));
 }
 
 Date::Date(int day, int month, int year) {
 	if (!isValidDate(day, month, year)) {
 		throw JiraInvalidArgumentException(std::string(DateConstants::ERROR_INVALID_DATE_VALUES));
 	}
-	this->day = day;
-	this->month = month;
 	this->year = year;
+	this->month = month;
+	this->day = day;
 }
 
 

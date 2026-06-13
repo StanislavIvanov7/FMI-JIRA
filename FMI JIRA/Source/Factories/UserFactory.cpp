@@ -18,8 +18,6 @@ std::unique_ptr<User> UserFactory::createUser(
         return std::make_unique<TeachingAssistant>(username, password);
     case UserRole::Lecturer:
         return std::make_unique<Lecturer>(username, password);
-    case UserRole::Administrator:
-        return Administrator::getInstance().clone();
     default:
         throw JiraInvalidArgumentException(std::string(UserFactoryConstants::ERROR_INVALID_CREATE_ROLE));
     }
@@ -30,17 +28,19 @@ std::unique_ptr<User> UserFactory::loadUser(
     const std::string& username,
     const std::string& password,
     UserRole role,
-    const std::string& facultyNumber)
+    const std::string& facultyNumber, 
+    int completedTasks,
+    int inProgressTasks,
+    double performanceScore)
 {
     switch (role) {
     case UserRole::Student:
-        return std::make_unique<Student>(id, username, password, facultyNumber);
+        return std::make_unique<Student>(id, username, password,facultyNumber,
+            completedTasks, inProgressTasks, performanceScore);
     case UserRole::TeachingAssistant:
         return std::make_unique<TeachingAssistant>(id, username, password);
     case UserRole::Lecturer:
         return std::make_unique<Lecturer>(id, username, password);
-    case UserRole::Administrator:
-        return Administrator::getInstance().clone();
     default:
         throw JiraInvalidArgumentException(std::string(UserFactoryConstants::ERROR_INVALID_LOAD_ROLE));
     }

@@ -1,9 +1,14 @@
 #include "Student.h"
 #include "Exceptions/JiraInvalidArgumentException.h"
 
-Student::Student(size_t id, const std::string& username, const std::string& password, const std::string& facultyNumber)
+Student::Student(size_t id, const std::string& username, 
+    const std::string& password, const std::string& facultyNumber,
+    int completedTasks, int inProgressTasks, double performanceScore)
     : User(id, username, password, UserRole::Student),
-    facultyNumber(validateFacultyNumber(facultyNumber)) {
+    facultyNumber(validateFacultyNumber(facultyNumber)),
+    completedTasks(completedTasks),
+    inProgressTasks(inProgressTasks),
+    performanceScore(performanceScore) {
 }
 
 Student::Student(const std::string& username, const std::string& password, const std::string& facultyNumber)

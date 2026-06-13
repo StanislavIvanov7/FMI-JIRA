@@ -72,8 +72,6 @@ public:
         std::optional<double> grade, bool approved, std::vector<Comment> comments,
         std::vector<std::string> tags, std::vector<HistoryEntry> changeHistory);
 
-    Task() = default;
-
     size_t getId() const;
     std::string getFormattedId() const;
     const std::string& getTitle() const;
@@ -104,8 +102,6 @@ public:
     void addComment(const Comment& comment);
     void addTag(const std::string& tag, const User* changedBy, const Date& timestamp);
 
-  /*  void save(std::ostream& os) const;
-    static std::unique_ptr<Task> load(std::istream& is, const AppData& context);*/
 
 
     friend std::ostream& operator<<(std::ostream& os, const Task& task);

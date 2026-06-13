@@ -2,17 +2,17 @@
 #include "Models/Task/Task.h"
 #include "Exceptions/JiraInvalidArgumentException.h"
 
-std::unique_ptr<Task> TaskFactory::createTask(
+std::shared_ptr<Task> TaskFactory::createTask(
     const std::string& title,
     const std::string& description,
     TaskType type,
     TaskPriority priority,
     const Date& deadline)
 {
-    return std::make_unique<Task>(title, description, type, priority, deadline);
+    return std::make_shared<Task>(title, description, type, priority, deadline);
 }
 
-std::unique_ptr<Task> TaskFactory::loadTask(
+std::shared_ptr<Task> TaskFactory::loadTask(
     size_t id,
     const std::string& title,
     const std::string& description,
@@ -29,7 +29,7 @@ std::unique_ptr<Task> TaskFactory::loadTask(
     const std::vector<HistoryEntry>& changeHistory)
 {
    
-    return std::make_unique<Task>(
+    return std::make_shared<Task>(
         id,
         title,
         description,

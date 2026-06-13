@@ -25,8 +25,5 @@ public:
     const std::string& getContent() const;
     const Date& getCreationDate() const;
 
-    //void save(std::ostream& os) const;
-    //static Comment load(std::istream& is);
-
     friend std::ostream& operator<<(std::ostream& os, const Comment& comment);
 };

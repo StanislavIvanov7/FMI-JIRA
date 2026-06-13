@@ -9,7 +9,6 @@ namespace DateConstants {
 
     constexpr int MIN_VALID_YEAR = 1900;
     constexpr int MAX_VALID_YEAR = 2100;
-    constexpr int DEFAULT_SYSTEM_YEAR = 2026;
     constexpr int MIN_VALID_MONTH = 1;
     constexpr int MAX_VALID_MONTH = 12;
     constexpr int MIN_VALID_DAY = 1;
@@ -50,9 +49,9 @@ namespace DateConstants {
 
 class Date {
 private:
-    int year = DateConstants::DEFAULT_SYSTEM_YEAR;
-    int month = DateConstants::MIN_VALID_MONTH;
-    int day = DateConstants::MIN_VALID_DAY;
+    int year;
+    int month;
+    int day;
 
     static bool isLeapYear(int y);
     static bool isValidDate(int d, int m, int y);

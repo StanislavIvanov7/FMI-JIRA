@@ -24,7 +24,7 @@ private:
     std::string name;
     std::string description;
     std::vector<User*> members;                   
-    std::vector<std::unique_ptr<Task>> tasks; 
+    std::vector<std::shared_ptr<Task>> tasks;
     std::vector<Stage> stages;
     ProjectStatus status;
 
@@ -37,7 +37,7 @@ public:
     const std::string& getDescription() const;
     ProjectStatus getStatus() const;
     const std::vector<User*>& getMembers() const;
-    const std::vector<std::unique_ptr<Task>>& getTasks() const;
+    const std::vector<std::shared_ptr<Task>>& getTasks() const;
     const std::vector<Stage>& getStages() const;
 
     void setDescription(const std::string& description);
@@ -49,9 +49,9 @@ public:
     User* findMember(const std::string& username);
     const User* findMember(const std::string& username) const;
 
-    Task* addTask(std::unique_ptr<Task> task);
-    Task* findTask(size_t taskId) const;
-    Task* findTaskByFormattedId(const std::string& formattedId) const;
+    std::shared_ptr<Task> addTask(std::shared_ptr<Task> task);
+    std::shared_ptr<Task> findTask(size_t taskId) const;
+    std::shared_ptr<Task> findTaskByFormattedId(const std::string& formattedId) const;
 
     void addStage(const Stage& stage);
     Stage* findStage(const std::string& stageName);

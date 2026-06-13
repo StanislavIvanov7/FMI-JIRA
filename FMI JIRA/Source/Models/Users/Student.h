@@ -22,8 +22,9 @@ private:
 
 public:
 
-    Student(size_t id, const std::string& username, const std::string& password, const std::string& facultyNumber);
     Student(const std::string& username, const std::string& password, const std::string& facultyNumber);
+    Student(size_t id, const std::string& username, const std::string& password,
+        const std::string& facultyNumber, int completedTasks, int inProgressTasks, double performanceScore);
 
     const std::string& getFacultyNumber() const;
     int getCompletedTasks() const;

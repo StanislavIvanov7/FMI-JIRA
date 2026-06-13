@@ -5,6 +5,7 @@
 #include "Utils/Date.h"
 #include "Utils/Enums/StageStatus.h"
 #include "Models/Task/Task.h"
+#include<memory>
 
 namespace StageConstants {
     constexpr std::string_view ERROR_EMPTY_NAME = "Stage name cannot be empty.";
@@ -21,7 +22,7 @@ private:
     Date startDate;
     Date endDate;
     StageStatus status;
-    std::vector<Task*> tasks;
+    std::vector<std::weak_ptr<Task>> tasks;
 
 public:
 
@@ -33,15 +34,15 @@ public:
     const Date& getStartDate() const;
     const Date& getEndDate() const;
     StageStatus getStatus() const;
-    const std::vector<Task*>& getTasks() const;
+    const std::vector<std::weak_ptr<Task>>& getTasks() const;
 
     void start(const Date& currentStartDate);
     void finish(const Date& currentEndDate);
 
-    void addTask(Task* task);
+    void addTask(const std::shared_ptr<Task>& task);
     void removeTask(size_t taskId);
     bool containsTask(size_t taskId) const;
-    Task* findTask(size_t taskId) const;
+    std::shared_ptr<Task> findTask(size_t taskId) const;
 
     int getTotalTaskCount() const;
     int getCompletedTaskCount() const;

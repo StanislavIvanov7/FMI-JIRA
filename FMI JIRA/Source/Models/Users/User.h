@@ -15,7 +15,7 @@ namespace UserConstants {
 class User
 {
 
-    private:
+    protected:
         static size_t idCounter; 
 
         size_t id;
@@ -37,6 +37,7 @@ class User
 
         virtual std::unique_ptr<User> clone() const = 0;
         virtual void displayInfo(std::ostream& os) const;
+
         virtual ~User() noexcept = default;
        
         friend std::ostream& operator<<(std::ostream& os, const User& user);

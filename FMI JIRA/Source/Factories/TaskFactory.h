@@ -24,7 +24,7 @@ public:
   
     TaskFactory() = delete;
 
-    static std::unique_ptr<Task> createTask(
+    static std::shared_ptr<Task> createTask(
         const std::string& title,
         const std::string& description,
         TaskType type,
@@ -32,7 +32,7 @@ public:
         const Date& deadline
     );
 
-    static std::unique_ptr<Task> loadTask(
+    static std::shared_ptr<Task> loadTask(
         size_t id,
         const std::string& title,
         const std::string& description,

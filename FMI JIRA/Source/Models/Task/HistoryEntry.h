@@ -34,8 +34,5 @@ public:
     const std::string& getNewValue() const;
     const Date& getTimestamp() const;
 
-   /* void save(std::ostream& os) const;
-    static HistoryEntry load(std::istream& is);*/
-
     friend std::ostream& operator<<(std::ostream& os, const HistoryEntry& entry);
 };

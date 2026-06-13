@@ -25,7 +25,8 @@ const std::string& Stage::getName() const { return name; }
 const Date& Stage::getStartDate() const { return startDate; }
 const Date& Stage::getEndDate() const { return endDate; }
 StageStatus Stage::getStatus() const { return status; }
-const std::vector<Task*>& Stage::getTasks() const { return tasks; }
+
+const std::vector<std::weak_ptr<Task>>& Stage::getTasks() const { return tasks; }
 
 void Stage::start(const Date& currentStartDate) {
     if (status != StageStatus::Planned) {
@@ -46,17 +47,19 @@ void Stage::finish(const Date& currentEndDate) {
     status = StageStatus::Finished;
 }
 
-void Stage::addTask(Task* task) {
+void Stage::addTask(const std::shared_ptr<Task>& task) {
     if (!task) return;
+
     if (containsTask(task->getId())) {
         throw JiraInvalidArgumentException(std::string(StageConstants::ERROR_TASK_ALREADY_EXISTS));
     }
-    tasks.push_back(task);
+    tasks.push_back(task); 
 }
 
 void Stage::removeTask(size_t taskId) {
-    auto it = std::remove_if(tasks.begin(), tasks.end(), [taskId](const Task* t) {
-        return t->getId() == taskId;
+    auto it = std::remove_if(tasks.begin(), tasks.end(), [taskId](const std::weak_ptr<Task>& wp) {
+        auto sp = wp.lock(); 
+        return sp && sp->getId() == taskId;
         });
 
     if (it == tasks.end()) {
@@ -66,25 +69,30 @@ void Stage::removeTask(size_t taskId) {
 }
 
 bool Stage::containsTask(size_t taskId) const {
-    return std::any_of(tasks.begin(), tasks.end(), [taskId](const Task* t) {
-        return t->getId() == taskId;
+    return std::any_of(tasks.begin(), tasks.end(), [taskId](const std::weak_ptr<Task>& wp) {
+        auto sp = wp.lock();
+        return sp && sp->getId() == taskId;
         });
 }
 
-Task* Stage::findTask(size_t taskId) const {
-    auto it = std::find_if(tasks.begin(), tasks.end(), [taskId](const Task* t) {
-        return t->getId() == taskId;
+std::shared_ptr<Task> Stage::findTask(size_t taskId) const {
+    auto it = std::find_if(tasks.begin(), tasks.end(), [taskId](const std::weak_ptr<Task>& wp) {
+        auto sp = wp.lock();
+        return sp && sp->getId() == taskId;
         });
-    return (it != tasks.end()) ? *it : nullptr;
+
+    return (it != tasks.end()) ? it->lock() : nullptr;
 }
 
 int Stage::getTotalTaskCount() const {
     return static_cast<int>(tasks.size());
 }
 
+
 int Stage::getCompletedTaskCount() const {
-    return static_cast<int>(std::count_if(tasks.begin(), tasks.end(), [](const Task* t) {
-        return t->getStatus() == TaskStatus::Done;
+    return static_cast<int>(std::count_if(tasks.begin(), tasks.end(), [](const std::weak_ptr<Task>& wp) {
+        auto sp = wp.lock();
+        return sp && sp->getStatus() == TaskStatus::Done;
         }));
 }
 
