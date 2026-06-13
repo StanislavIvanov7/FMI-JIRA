@@ -143,6 +143,17 @@
     </Manifest>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Source\Commands\Student\AddTagCommand.cpp" />
+    <ClCompile Include="Source\Commands\Student\FilterTasksCommand.cpp" />
+    <ClCompile Include="Source\Commands\Student\SearchTasksCommand.cpp" />
+    <ClCompile Include="Source\Commands\Student\MyTasksCommand.cpp" />
+    <ClCompile Include="Source\Commands\Student\AddCommentCommand.cpp" />
+    <ClCompile Include="Source\Commands\Student\ChangeStatusCommand.cpp" />
+    <ClCompile Include="Source\Commands\Student\AssignTaskCommand.cpp" />
+    <ClCompile Include="Source\Commands\Student\CreateTaskCommand.cpp" />
+    <ClCompile Include="Source\Commands\Student\ListTaskCommand.cpp" />
+    <ClCompile Include="Source\Commands\Student\ListProjectsCommand.cpp" />
+    <ClCompile Include="Source\Commands\Student\JoinProjectCommand.cpp" />
     <ClCompile Include="Source\Commands\Common\CloseCommand.cpp" />
     <ClCompile Include="Source\Commands\Common\HelpCommand.cpp" />
     <ClCompile Include="Source\Commands\Common\LogoutCommand.cpp" />
@@ -168,8 +179,20 @@
     <ClCompile Include="Source\Factories\UserFactory.cpp" />
     <ClCompile Include="Source\Factories\TaskFactory.cpp" />
     <ClCompile Include="Source\Commands\Common\ViewProfileCommand.cpp" />
+    <ClCompile Include="Source\Commands\Student\UpcomingTasksCommand.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Source\Commands\Student\AddTagCommand.h" />
+    <ClInclude Include="Source\Commands\Student\FilterTasksCommand.h" />
+    <ClInclude Include="Source\Commands\Student\SearchTasksCommand.h" />
+    <ClInclude Include="Source\Commands\Student\MyTasksCommand.h" />
+    <ClInclude Include="Source\Commands\Student\AddCommentCommand.h" />
+    <ClInclude Include="Source\Commands\Student\ChangeStatusCommand.h" />
+    <ClInclude Include="Source\Commands\Student\AssignTaskCommand.h" />
+    <ClInclude Include="Source\Commands\Student\CreateTaskCommand.h" />
+    <ClInclude Include="Source\Commands\Student\ListTaskCommand.h" />
+    <ClInclude Include="Source\Commands\Student\ListProjectsCommand.h" />
+    <ClInclude Include="Source\Commands\Student\JoinProjectCommand.h" />
     <ClInclude Include="Source\Commands\Common\CloseCommand.h" />
     <ClInclude Include="Source\Commands\Common\HelpCommand.h" />
     <ClInclude Include="Source\Commands\Common\LogoutCommand.h" />
@@ -200,6 +223,7 @@
     <ClInclude Include="Source\Factories\UserFactory.h" />
     <ClInclude Include="Source\Factories\TaskFactory.h" />
     <ClInclude Include="Source\Commands\Common\ViewProfileCommand.h" />
+    <ClInclude Include="Source\Commands\Student\UpcomingTasksCommand.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

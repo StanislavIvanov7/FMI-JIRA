@@ -18,6 +18,8 @@ namespace CommandConstants {
 
 	constexpr std::string_view ERR_NOT_LOGGED_IN = "No user is currently logged in.";
 	constexpr std::string_view MSG_EXITING = "Exiting application...";
+	constexpr std::string_view MSG_NO_PROJECTS = "No projects found in the system.";
+	constexpr std::string_view MSG_AVAILABLE_PROJECTS = "Available projects:";
 
 	constexpr std::string_view ERR_INVALID_ARGS = "Invalid number of arguments provided.";
 	constexpr std::string_view ERR_ACCESS_DENIED = "You do not have permission to execute this command.";
