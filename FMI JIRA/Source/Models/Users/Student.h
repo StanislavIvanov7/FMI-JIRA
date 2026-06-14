@@ -5,7 +5,7 @@
 #include <string_view>
 
 namespace StudentConstants {
-    constexpr std::string_view ERROR_EMPTY_FACULTY_NUMBER = "Faculty number cannot be empty.";
+   
 
     constexpr int INITIAL_COUNTER_VALUE = 0;
     constexpr double INITIAL_SCORE_VALUE = 0.0;
@@ -13,20 +13,19 @@ namespace StudentConstants {
 
 class Student : public User {
 private:
-    std::string facultyNumber;
+ 
     int completedTasks = StudentConstants::INITIAL_COUNTER_VALUE;
     int inProgressTasks = StudentConstants::INITIAL_COUNTER_VALUE;
     double performanceScore = StudentConstants::INITIAL_SCORE_VALUE;
 
-    static const std::string& validateFacultyNumber(const std::string& fn);
+   
 
 public:
 
-    Student(const std::string& username, const std::string& password, const std::string& facultyNumber);
+    Student(const std::string& username, const std::string& password);
     Student(size_t id, const std::string& username, const std::string& password,
-        const std::string& facultyNumber, int completedTasks, int inProgressTasks, double performanceScore);
+        int completedTasks, int inProgressTasks, double performanceScore);
 
-    const std::string& getFacultyNumber() const;
     int getCompletedTasks() const;
     int getInProgressTasks() const;
     double getPerformanceScore() const;

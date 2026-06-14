@@ -1,8 +1,10 @@
 #include "AppData.h"
 #include "Models/Users/User.h"
+#include "Models/Users/Administrator.h"
 #include "Models/Project/Project.h"
 #include <algorithm>
 #include <filesystem>
+#include "Factories/UserFactory.h"
 
 bool AppData::isRunning() const { 
     return running;
@@ -149,4 +151,19 @@ void AppData::load() {
             if (p) p->addTask(task);
         }
     }
+}
+
+
+void AppData::ensureDefaultAdmin() {
+
+    for (const auto& user : users) {
+        if (user->getRole() == UserRole::Administrator) return;
+    }
+
+    
+    auto admin = std::unique_ptr<Administrator>(new Administrator("admin", "admin"));
+
+    users.push_back(std::move(admin));
+
+    std::clog << "[System] Admin created via friend access." << std::endl;
 }

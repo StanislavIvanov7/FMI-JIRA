@@ -41,4 +41,8 @@ public:
 
 	void save() const;
 	void load();
+
+	void ensureDefaultAdmin();
+	
+
 };

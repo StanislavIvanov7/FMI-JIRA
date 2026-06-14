@@ -13,7 +13,7 @@ std::unique_ptr<User> UserFactory::createUser(
 {
     switch (role) {
     case UserRole::Student:
-        return std::make_unique<Student>(username, password, facultyNumber);
+        return std::make_unique<Student>(username, password);
     case UserRole::TeachingAssistant:
         return std::make_unique<TeachingAssistant>(username, password);
     case UserRole::Lecturer:
@@ -35,7 +35,7 @@ std::unique_ptr<User> UserFactory::loadUser(
 {
     switch (role) {
     case UserRole::Student:
-        return std::make_unique<Student>(id, username, password,facultyNumber,
+        return std::make_unique<Student>(id, username, password,
             completedTasks, inProgressTasks, performanceScore);
     case UserRole::TeachingAssistant:
         return std::make_unique<TeachingAssistant>(id, username, password);

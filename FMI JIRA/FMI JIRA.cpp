@@ -16,6 +16,8 @@ int main() {
         std::clog << "[System] No existing state found or load failed. Starting with empty system." << std::endl;
     }
 
+    data.ensureDefaultAdmin();
+
     try {
         Engine engine(data);
         engine.run();

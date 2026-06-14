@@ -2,18 +2,16 @@
 #include "Exceptions/JiraInvalidArgumentException.h"
 
 Student::Student(size_t id, const std::string& username, 
-    const std::string& password, const std::string& facultyNumber,
+    const std::string& password,
     int completedTasks, int inProgressTasks, double performanceScore)
     : User(id, username, password, UserRole::Student),
-    facultyNumber(validateFacultyNumber(facultyNumber)),
     completedTasks(completedTasks),
     inProgressTasks(inProgressTasks),
     performanceScore(performanceScore) {
 }
 
-Student::Student(const std::string& username, const std::string& password, const std::string& facultyNumber)
-    : User(username, password, UserRole::Student),
-    facultyNumber(validateFacultyNumber(facultyNumber))
+Student::Student(const std::string& username, const std::string& password)
+    : User(username, password, UserRole::Student)
 {
   
 }
@@ -22,9 +20,6 @@ std::unique_ptr<User> Student::clone() const {
     return std::make_unique<Student>(*this);
 }
 
-const std::string& Student::getFacultyNumber() const {
-    return facultyNumber;
-}
 
 int Student::getCompletedTasks() const {
     return completedTasks; 
@@ -59,15 +54,12 @@ void Student::addPerformancePoints(double points) {
 
 void Student::save(std::ostream& os) const {
     User::save(os); 
-    os << facultyNumber << "\n"
-        << completedTasks << "\n"
+    os  << completedTasks << "\n"
         << inProgressTasks << "\n"
         << performanceScore << "\n";
 }
 
 void Student::loadSubclass(std::istream& is) {
-   
-    std::getline(is, facultyNumber);
 
    
     int completed, inProgress;
@@ -84,15 +76,9 @@ void Student::displayInfo(std::ostream& os) const {
 
     User::displayInfo(os);
 
-    os << " | FN: " << facultyNumber
+    os 
         << " | Completed tasks: " << completedTasks
         << " | In progress: " << inProgressTasks
         << " | Performance score: " << performanceScore;
 }
 
-const std::string& Student::validateFacultyNumber(const std::string& fn) {
-    if (fn.empty()) {
-        throw JiraInvalidArgumentException(std::string(StudentConstants::ERROR_EMPTY_FACULTY_NUMBER));
-    }
-    return fn;
-}
