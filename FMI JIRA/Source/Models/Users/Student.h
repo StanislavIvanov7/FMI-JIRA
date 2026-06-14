@@ -36,6 +36,10 @@ public:
     void decrementInProgressTasks();
     void addPerformancePoints(double points);
 
+    
+    void save(std::ostream& os) const override;
+    void loadSubclass(std::istream& is) override;
+
     std::unique_ptr<User> clone() const override;
     void displayInfo(std::ostream& os) const override;
 };

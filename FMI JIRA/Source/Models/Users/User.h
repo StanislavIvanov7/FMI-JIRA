@@ -38,6 +38,10 @@ class User
         virtual std::unique_ptr<User> clone() const = 0;
         virtual void displayInfo(std::ostream& os) const;
 
+        virtual void save(std::ostream& os) const;
+        virtual void loadSubclass(std::istream& is) {}
+        static std::unique_ptr<User> loadPoly(std::istream& is);
+
         virtual ~User() noexcept = default;
        
         friend std::ostream& operator<<(std::ostream& os, const User& user);

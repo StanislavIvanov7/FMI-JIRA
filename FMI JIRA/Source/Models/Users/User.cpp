@@ -1,6 +1,7 @@
 #include "User.h"
 #include "Exceptions/JiraInvalidArgumentException.h"
 #include "Utils/Enums/UserRole.h"
+#include "Factories/UserFactory.h"
 size_t User::idCounter = UserConstants::INITIAL_ID_VALUE;
 
 User::User(const std::string& username, const std::string& password, UserRole role)
@@ -73,6 +74,37 @@ void User::displayInfo(std::ostream& os) const {
         << " | Role: " << getRoleString();
 }
 
+void User::save(std::ostream& os) const
+{
+    os << static_cast<int>(role) << "\n"
+        << id << "\n"
+        << username << "\n"
+        << password << "\n";
+}
+
+std::unique_ptr<User> User::loadPoly(std::istream& is) {
+    int roleInt;
+    if (!(is >> roleInt)) return nullptr;
+    is.ignore();
+
+    size_t id;
+    is >> id;
+    is.ignore();
+
+    std::string username, password;
+    std::getline(is, username);
+    std::getline(is, password);
+
+    UserRole role = static_cast<UserRole>(roleInt);
+
+    std::unique_ptr<User> user = UserFactory::loadUser(id, username, password, role, "", 0, 0, 0.0);
+
+    if (user) {
+        user->loadSubclass(is);
+    }
+
+    return user;
+}
 std::ostream& operator<<(std::ostream& os, const User& user) {
     user.displayInfo(os); 
     return os;

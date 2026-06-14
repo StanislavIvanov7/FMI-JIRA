@@ -57,6 +57,29 @@ void Student::addPerformancePoints(double points) {
     performanceScore += points;
 }
 
+void Student::save(std::ostream& os) const {
+    User::save(os); 
+    os << facultyNumber << "\n"
+        << completedTasks << "\n"
+        << inProgressTasks << "\n"
+        << performanceScore << "\n";
+}
+
+void Student::loadSubclass(std::istream& is) {
+   
+    std::getline(is, facultyNumber);
+
+   
+    int completed, inProgress;
+    double score;
+
+    is >> completed >> inProgress >> score;
+    is.ignore(); 
+
+    this->completedTasks = completed;
+    this->inProgressTasks = inProgress;
+    this->performanceScore = score;
+}
 void Student::displayInfo(std::ostream& os) const {
 
     User::displayInfo(os);
