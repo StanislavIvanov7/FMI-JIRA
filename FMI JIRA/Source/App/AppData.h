@@ -4,6 +4,7 @@
 #include <string>
 #include <fstream>
 #include <optional>
+#include "Models/Users/User.h"
 
 class User;
 class Project;

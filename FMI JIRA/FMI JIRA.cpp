@@ -1,20 +1,31 @@
-// FMI JIRA.cpp : This file contains the 'main' function. Program execution begins and ends there.
-//
-
 #include <iostream>
+#include <exception>
+#include "App/AppData.h"
+#include "App/Engine.h"
 
-int main()
-{
-    std::cout << "Hello World!\n";
+int main() {
+   
+    AppData data;
+
+    
+    try {
+        data.load();
+    }
+    catch (const std::exception& e) {
+        
+        std::clog << "[System] No existing state found or load failed. Starting with empty system." << std::endl;
+    }
+
+    try {
+        Engine engine(data);
+        engine.run();
+    }
+    catch (const std::exception& e) {
+        
+        std::cerr << "CRITICAL ERROR: " << e.what() << std::endl;
+        return 1;
+    }
+
+    
+    return 0;
 }
-
-// Run program: Ctrl + F5 or Debug > Start Without Debugging menu
-// Debug program: F5 or Debug > Start Debugging menu
-
-// Tips for Getting Started: 
-//   1. Use the Solution Explorer window to add/manage files
-//   2. Use the Team Explorer window to connect to source control
-//   3. Use the Output window to see build output and other messages
-//   4. Use the Error List window to view errors
-//   5. Go to Project > Add New Item to create new code files, or Project > Add Existing Item to add existing code files to the project
-//   6. In the future, to open this project again, go to File > Open > Project and select the .sln file

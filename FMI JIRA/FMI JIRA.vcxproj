@@ -143,6 +143,7 @@
     </Manifest>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Source\App\Engine.cpp" />
     <ClCompile Include="Source\Commands\Administrator\LoadCommand.cpp" />
     <ClCompile Include="Source\Commands\Administrator\SaveCommand.cpp" />
     <ClCompile Include="Source\Commands\Lecturer\FinalizeProjectCommand.cpp" />
@@ -200,6 +201,7 @@
     <ClCompile Include="Source\Commands\Lecturer\StudentReportCommand.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Source\App\Engine.h" />
     <ClInclude Include="Source\Commands\Administrator\LoadCommand.h" />
     <ClInclude Include="Source\Commands\Administrator\SaveCommand.h" />
     <ClInclude Include="Source\Commands\Lecturer\FinalizeProjectCommand.h" />
