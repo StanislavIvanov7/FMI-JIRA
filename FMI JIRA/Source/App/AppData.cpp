@@ -25,6 +25,25 @@ User* AppData::findUser(const std::string& username) const {
     return (it != users.end()) ? it->get() : nullptr;
 }
 
+bool AppData::removeUser(const std::string& username) {
+    for (auto& project : projects) {
+        if (project->hasMember(username)) {
+            project->removeMember(username);
+        }
+    }
+
+    auto it = std::remove_if(users.begin(), users.end(),
+        [&username](const std::unique_ptr<User>& u) {
+            return u && u->getUsername() == username;
+        });
+
+    if (it != users.end()) {
+        users.erase(it, users.end());
+        return true; 
+    }
+
+    return false;
+}
 
 void AppData::setCurrentUser(User* user) {
     currentUser = user;

@@ -26,6 +26,7 @@ public:
 
 	void addUser(std::unique_ptr<User> user);
 	User* findUser(const std::string& username) const;
+	bool removeUser(const std::string& username);
 
 	void setCurrentUser(User* user);
 	User* getCurrentUser() const;

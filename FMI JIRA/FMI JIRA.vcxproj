@@ -143,6 +143,11 @@
     </Manifest>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Source\Commands\Administrator\RegisterUserCommand.cpp" />
+    <ClCompile Include="Source\Commands\Administrator\RemoveUserCommand.cpp" />
+    <ClCompile Include="Source\Commands\Administrator\AddUserToProjectCommand.cpp" />
+    <ClCompile Include="Source\Commands\Administrator\ArchiveProjectCommand.cpp" />
+    <ClCompile Include="Source\Commands\Administrator\CreateProjectCommand.cpp" />
     <ClCompile Include="Source\Commands\TeachingAssistant\MoveTaskToStageCommand.cpp" />
     <ClCompile Include="Source\Commands\TeachingAssistant\FinishStageCommand.cpp" />
     <ClCompile Include="Source\Commands\TeachingAssistant\ReviewTaskCommand.cpp" />
@@ -188,6 +193,11 @@
     <ClCompile Include="Source\Commands\TeachingAssistant\StageReportCommand.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Source\Commands\Administrator\RegisterUserCommand.h" />
+    <ClInclude Include="Source\Commands\Administrator\RemoveUserCommand.h" />
+    <ClInclude Include="Source\Commands\Administrator\AddUserToProjectCommand.h" />
+    <ClInclude Include="Source\Commands\Administrator\ArchiveProjectCommand.h" />
+    <ClInclude Include="Source\Commands\Administrator\CreateProjectCommand.h" />
     <ClInclude Include="Source\Commands\TeachingAssistant\MoveTaskToStageCommand.h" />
     <ClInclude Include="Source\Commands\TeachingAssistant\FinishStageCommand.h" />
     <ClInclude Include="Source\Commands\TeachingAssistant\ReviewTaskCommand.h" />
