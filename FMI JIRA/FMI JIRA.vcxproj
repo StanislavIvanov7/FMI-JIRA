@@ -143,6 +143,10 @@
     </Manifest>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Source\Commands\Lecturer\FinalizeProjectCommand.cpp" />
+    <ClCompile Include="Source\Commands\Lecturer\GradeTaskCommand.cpp" />
+    <ClCompile Include="Source\Commands\Lecturer\ListAllTasksCommand.cpp" />
+    <ClCompile Include="Source\Commands\Lecturer\ListAllProjectsCommand.cpp" />
     <ClCompile Include="Source\Commands\Administrator\RegisterUserCommand.cpp" />
     <ClCompile Include="Source\Commands\Administrator\RemoveUserCommand.cpp" />
     <ClCompile Include="Source\Commands\Administrator\AddUserToProjectCommand.cpp" />
@@ -191,8 +195,13 @@
     <ClCompile Include="Source\Commands\Student\UpcomingTasksCommand.cpp" />
     <ClCompile Include="Source\Commands\TeachingAssistant\StartStageCommand.cpp" />
     <ClCompile Include="Source\Commands\TeachingAssistant\StageReportCommand.cpp" />
+    <ClCompile Include="Source\Commands\Lecturer\StudentReportCommand.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Source\Commands\Lecturer\FinalizeProjectCommand.h" />
+    <ClInclude Include="Source\Commands\Lecturer\GradeTaskCommand.h" />
+    <ClInclude Include="Source\Commands\Lecturer\ListAllTasksCommand.h" />
+    <ClInclude Include="Source\Commands\Lecturer\ListAllProjectsCommand.h" />
     <ClInclude Include="Source\Commands\Administrator\RegisterUserCommand.h" />
     <ClInclude Include="Source\Commands\Administrator\RemoveUserCommand.h" />
     <ClInclude Include="Source\Commands\Administrator\AddUserToProjectCommand.h" />
@@ -246,6 +255,7 @@
     <ClInclude Include="Source\Commands\Student\UpcomingTasksCommand.h" />
     <ClInclude Include="Source\Commands\TeachingAssistant\StartStageCommand.h" />
     <ClInclude Include="Source\Commands\TeachingAssistant\StageReportCommand.h" />
+    <ClInclude Include="Source\Commands\Lecturer\StudentReportCommand.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
