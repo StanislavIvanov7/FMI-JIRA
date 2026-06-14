@@ -103,6 +103,8 @@ public:
     void addTag(const std::string& tag, const User* changedBy, const Date& timestamp);
 
 
+    void save(std::ostream& os) const;
+    static std::shared_ptr<Task> load(std::istream& is, const AppData& context);
 
     friend std::ostream& operator<<(std::ostream& os, const Task& task);
 };

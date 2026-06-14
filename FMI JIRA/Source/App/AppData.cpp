@@ -2,6 +2,7 @@
 #include "Models/Users/User.h"
 #include "Models/Project/Project.h"
 #include <algorithm>
+#include <filesystem>
 
 bool AppData::isRunning() const { 
     return running;
@@ -76,4 +77,76 @@ Project* AppData::findProject(const std::string& name) const {
 
 const std::vector<std::shared_ptr<Project>>& AppData::getProjects() const {
     return projects;
+}
+
+void AppData::save() const{
+    std::filesystem::create_directory("data");
+
+  
+    std::ofstream uOut("data/users.txt");
+    if (uOut.is_open()) {
+        uOut << users.size() << "\n";
+        for (const auto& u : users) u->save(uOut);
+    }
+
+  
+    std::ofstream pOut("data/projects.txt");
+    if (pOut.is_open()) {
+        pOut << projects.size() << "\n";
+        for (const auto& p : projects) p->save(pOut);
+    }
+
+
+    std::ofstream tOut("data/tasks.txt");
+    if (tOut.is_open()) {
+        size_t totalTasks = 0;
+        for (const auto& p : projects) {
+           
+            totalTasks += p->getTasks().size();
+        }
+
+        tOut << totalTasks << "\n";
+        for (const auto& p : projects) {
+            for (const auto& task : p->getTasks()) {
+                tOut << p->getName() << "\n"; 
+                task->save(tOut);
+            }
+        }
+    }
+}
+
+void AppData::load() {
+   
+    std::ifstream uIn("data/users.txt");
+    if (uIn.is_open()) {
+        size_t count; uIn >> count; uIn.ignore();
+        for (size_t i = 0; i < count; ++i) {
+            this->addUser(User::loadPoly(uIn));
+        }
+    }
+
+   
+    std::ifstream pIn("data/projects.txt");
+    if (pIn.is_open()) {
+        size_t count; pIn >> count; pIn.ignore();
+        for (size_t i = 0; i < count; ++i) {
+            this->addProject(Project::loadSkeleton(pIn, *this));
+        }
+    }
+
+   
+    std::ifstream tIn("data/tasks.txt");
+    if (tIn.is_open()) {
+        size_t count; tIn >> count; tIn.ignore();
+        for (size_t i = 0; i < count; ++i) {
+            std::string projName;
+            std::getline(tIn, projName);
+
+            auto task = Task::load(tIn, *this);
+            tIn.ignore();
+
+            Project* p = findProject(projName);
+            if (p) p->addTask(task);
+        }
+    }
 }

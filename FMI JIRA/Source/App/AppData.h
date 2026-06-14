@@ -2,6 +2,7 @@
 #include <vector>
 #include <memory>
 #include <string>
+#include <fstream>
 #include <optional>
 
 class User;
@@ -36,4 +37,7 @@ public:
 	void addProject(std::shared_ptr<Project> project);
 	Project* findProject(const std::string& name) const;
 	const std::vector<std::shared_ptr<Project>>& getProjects() const;
+
+	void save() const;
+	void load();
 };

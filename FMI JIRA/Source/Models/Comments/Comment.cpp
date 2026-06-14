@@ -1,5 +1,6 @@
 #include "Comment.h"
 #include "Models/Users/User.h"
+#include "App/AppData.h"
 #include "Exceptions/JiraInvalidArgumentException.h"
 #include <format>
 
@@ -25,6 +26,34 @@ const std::string& Comment::getContent() const {
 const Date& Comment::getCreationDate() const {
 	return creationDate;
 }
+void Comment::save(std::ostream& os) const {
+    os << author->getUsername() << "\n"
+        << content << "\n"
+        << creationDate.getDay() << " "
+        << creationDate.getMonth() << " "
+        << creationDate.getYear() << "\n";
+}
+
+Comment Comment::load(std::istream& is, const AppData& context) {
+    std::string username, content;
+
+   
+    std::getline(is, username);
+    std::getline(is, content);
+
+    int d, m, y;
+    is >> d >> m >> y;
+    is.ignore(); 
+
+    Date date(d, m, y);
+
+    
+    const User* userPtr = context.findUser(username);
+
+   
+    return Comment(userPtr, content, date);
+}
+
 
 std::ostream& operator<<(std::ostream& os, const Comment& comment) {
 	os << std::format("[{}] {}: {}",

@@ -1,5 +1,6 @@
 #include "HistoryEntry.h"
 #include "Models/Users/User.h"
+#include "App/AppData.h"
 #include "Exceptions/JiraInvalidArgumentException.h"
 #include <format>
 
@@ -39,6 +40,36 @@ const std::string& HistoryEntry::getNewValue() const {
 
 const Date& HistoryEntry::getTimestamp() const {
 	return timestamp;
+}
+
+void HistoryEntry::save(std::ostream& os) const {
+	
+	os << changedBy->getUsername() << "\n"
+		<< field << "\n"
+		<< oldValue << "\n"
+		<< newValue << "\n"
+		<< timestamp.getDay() << " " << timestamp.getMonth() << " " << timestamp.getYear() << "\n";
+}
+
+HistoryEntry HistoryEntry::load(std::istream& is, const AppData& context) {
+	std::string username, field, oldValue, newValue;
+
+	std::getline(is, username);
+	std::getline(is, field);
+	std::getline(is, oldValue);
+	std::getline(is, newValue);
+
+	
+	int d, m, y;
+	is >> d >> m >> y;
+	is.ignore(); 
+	Date timestamp(d, m, y);
+
+	
+	const User* user = context.findUser(username);
+
+
+	return HistoryEntry(user, field, oldValue, newValue, timestamp);
 }
 
 std::ostream& operator<<(std::ostream& os, const HistoryEntry& entry) {

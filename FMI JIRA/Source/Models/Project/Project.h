@@ -65,5 +65,9 @@ public:
 	void finalize();
 	void archive();
 
+	void save(std::ostream& os) const;
+	static std::unique_ptr<Project> loadSkeleton(std::istream& is, const AppData& context);
+	void loadStages(std::istream& is, const AppData& context);
+
 	friend std::ostream& operator<<(std::ostream& os, const Project& project);
 };

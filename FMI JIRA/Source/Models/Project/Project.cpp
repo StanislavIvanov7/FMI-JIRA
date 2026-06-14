@@ -2,6 +2,7 @@
 #include "Models/Task/Task.h"
 #include "Models/Users/User.h"
 #include "Exceptions/JiraInvalidArgumentException.h"
+#include "App/AppData.h"
 #include <algorithm>
 #include <format>
 
@@ -141,6 +142,71 @@ void Project::finalize() {
 
 void Project::archive() {
     status = ProjectStatus::Finished;
+}
+
+void Project::save(std::ostream& os) const {
+    os << name << "\n"
+        << description << "\n"
+        << static_cast<int>(status) << "\n";
+
+    // 1. Членове (Username-и)
+    os << members.size() << "\n";
+    for (const auto* member : members) {
+        os << member->getUsername() << "\n";
+    }
+
+    // 2. Задачи
+    os << tasks.size() << "\n";
+    for (const auto& task : tasks) {
+        task->save(os);
+    }
+
+    // 3. Етапи
+    os << stages.size() << "\n";
+    for (const auto& stage : stages) {
+        stage.save(os);
+    }
+}
+
+std::unique_ptr<Project> Project::loadSkeleton(std::istream& is, const AppData& context) {
+    std::string name, description;
+    std::getline(is, name);
+    std::getline(is, description);
+
+    int statusInt;
+    is >> statusInt;
+    is.ignore();
+
+    auto project = std::make_unique<Project>(name, description);
+    project->setStatus(static_cast<ProjectStatus>(statusInt));
+
+    size_t memCount;
+    is >> memCount;
+    is.ignore();
+    for (size_t i = 0; i < memCount; ++i) {
+        std::string uname;
+        std::getline(is, uname);
+        project->addMember(context.findUser(uname));
+    }
+
+    size_t taskCount;
+    is >> taskCount;
+    is.ignore();
+    for (size_t i = 0; i < taskCount; ++i) {
+        project->addTask(Task::load(is, context));
+    }
+
+    return project;
+}
+
+void Project::loadStages(std::istream& is, const AppData& context) {
+    size_t stageCount;
+    is >> stageCount;
+    is.ignore();
+    for (size_t i = 0; i < stageCount; ++i) {
+
+        this->addStage(Stage::load(is, context));
+    }
 }
 
 std::ostream& operator<<(std::ostream& os, const Project& project) {

@@ -1,6 +1,8 @@
 #include "Stage.h"
 #include "Models/Task/Task.h"
 #include "Exceptions/JiraInvalidArgumentException.h"
+#include "App/AppData.h"
+#include "Models/Project/Project.h"
 #include <algorithm>
 #include <format>
 
@@ -95,7 +97,77 @@ int Stage::getCompletedTaskCount() const {
         return sp && sp->getStatus() == TaskStatus::Done;
         }));
 }
+void Stage::save(std::ostream& os) const {
+    os << name << "\n"
+        << static_cast<int>(status) << "\n";
 
+    os << startDate.getDay() << " " << startDate.getMonth() << " " << startDate.getYear() << "\n";
+    os << endDate.getDay() << " " << endDate.getMonth() << " " << endDate.getYear() << "\n";
+
+   
+    size_t validTaskCount = 0;
+    for (const auto& wp : tasks) {
+        if (!wp.expired()) {
+            validTaskCount++;
+        }
+    }
+
+    os << validTaskCount << "\n";
+    for (const auto& wp : tasks) {
+        if (auto sp = wp.lock()) {
+            os << sp->getId() << "\n";
+        }
+    }
+}
+
+Stage Stage::load(std::istream& is, const AppData& context) {
+    std::string name;
+    if (!std::getline(is, name)) return Stage();
+
+    int statusInt;
+    is >> statusInt;
+    is.ignore();
+
+    int sDay, sMonth, sYear;
+    is >> sDay >> sMonth >> sYear;
+    is.ignore();
+    Date startDate(sDay, sMonth, sYear);
+
+    int eDay, eMonth, eYear;
+    is >> eDay >> eMonth >> eYear;
+    is.ignore();
+    Date endDate(eDay, eMonth, eYear);
+
+    StageStatus status = static_cast<StageStatus>(statusInt);
+
+   
+    Stage stage(name, startDate, endDate, status);
+
+    size_t taskCount;
+    is >> taskCount;
+    is.ignore();
+
+    for (size_t i = 0; i < taskCount; ++i) {
+        size_t taskId;
+        is >> taskId;
+        is.ignore();
+
+        bool found = false;
+      
+        for (const auto& project : context.getProjects()) {
+            auto task = project->findTask(taskId);
+            if (task) {
+                stage.tasks.push_back(task);
+                found = true;
+                break;
+            }
+        }
+
+        
+    }
+
+    return stage;
+}
 std::ostream& operator<<(std::ostream& os, const Stage& stage) {
     os << std::format("Stage: {} [{}] | Tasks: {}/{}",
         stage.name,

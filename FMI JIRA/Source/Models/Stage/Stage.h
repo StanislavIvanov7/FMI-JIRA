@@ -47,5 +47,8 @@ public:
     int getTotalTaskCount() const;
     int getCompletedTaskCount() const;
 
+    void save(std::ostream& os) const;
+    static Stage load(std::istream& is, const AppData& context);
+
     friend std::ostream& operator<<(std::ostream& os, const Stage& stage);
 };

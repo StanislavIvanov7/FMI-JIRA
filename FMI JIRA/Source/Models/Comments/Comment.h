@@ -5,6 +5,7 @@
 #include <string_view>
 #include "Utils/Date.h"
 class User;
+class AppData;
 
 namespace CommentConstants {
     constexpr std::string_view ERROR_EMPTY_CONTENT = "Comment content cannot be empty.";
@@ -24,6 +25,9 @@ public:
     const User* getAuthor() const;
     const std::string& getContent() const;
     const Date& getCreationDate() const;
+
+    void save(std::ostream& os) const;
+    static Comment load(std::istream& is, const AppData& context);
 
     friend std::ostream& operator<<(std::ostream& os, const Comment& comment);
 };

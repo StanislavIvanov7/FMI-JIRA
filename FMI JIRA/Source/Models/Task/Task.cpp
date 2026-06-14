@@ -1,6 +1,7 @@
 #include "Task.h"
 #include "Models/Users/User.h"
 #include "Exceptions/JiraInvalidArgumentException.h"
+#include "App/AppData.h"
 #include <format>
 #include <algorithm>
 
@@ -130,6 +131,73 @@ void Task::addTag(const std::string& tag, const User* changedBy, const Date& tim
         changeHistory.emplace_back(changedBy, std::string(TaskConstants::FIELD_TAG_ADDED), std::string(TaskConstants::VALUE_NONE), tag, timestamp);
         tags.push_back(tag);
     }
+}
+
+void Task::save(std::ostream& os) const {
+   
+    os << id << "\n" << title << "\n" << description << "\n"
+        << static_cast<int>(type) << "\n" << static_cast<int>(priority) << "\n"
+        << static_cast<int>(status) << "\n";
+
+  
+    os << (assignee ? assignee->getUsername() : "Unassigned") << "\n";
+
+    
+    os << deadline.getDay() << " " << deadline.getMonth() << " " << deadline.getYear() << "\n";
+    os << points << "\n";
+    os << (grade.has_value() ? "1" : "0") << "\n";
+    if (grade.has_value()) os << grade.value() << "\n";
+    os << approved << "\n";
+
+    os << tags.size() << "\n";
+    for (const auto& tag : tags) os << tag << "\n";
+
+    os << comments.size() << "\n";
+    for (const auto& c : comments) c.save(os);
+
+    os << changeHistory.size() << "\n";
+    for (const auto& h : changeHistory) h.save(os); 
+}
+
+std::shared_ptr<Task> Task::load(std::istream& is, const AppData& context) {
+    size_t id; is >> id; is.ignore();
+    std::string title, description;
+    std::getline(is, title); std::getline(is, description);
+
+    int t, p, s; is >> t >> p >> s; is.ignore();
+
+    std::string assignName; std::getline(is, assignName);
+    const User* user = (assignName == "Unassigned") ? nullptr : context.findUser(assignName);
+
+    int d, m, y; is >> d >> m >> y; is.ignore();
+    Date deadline(d, m, y);
+
+    int points; is >> points;
+    bool hasGrade; is >> hasGrade;
+    std::optional<double> grade = std::nullopt;
+    if (hasGrade) { double g; is >> g; grade = g; }
+
+    bool approved; is >> approved; is.ignore();
+
+  
+    size_t tagCount; is >> tagCount; is.ignore();
+    std::vector<std::string> tags(tagCount);
+    for (auto& t : tags) std::getline(is, t);
+
+   
+    size_t commCount; is >> commCount; is.ignore();
+    std::vector<Comment> comments;
+    for (size_t i = 0; i < commCount; ++i) comments.push_back(Comment::load(is, context));
+
+
+    size_t histCount; is >> histCount; is.ignore();
+    std::vector<HistoryEntry> history;
+    for (size_t i = 0; i < histCount; ++i) history.push_back(HistoryEntry::load(is, context));
+
+    return std::make_shared<Task>(id, title, description, static_cast<TaskType>(t),
+        static_cast<TaskPriority>(p), static_cast<TaskStatus>(s),
+        user, deadline, points, grade, approved,
+        comments, tags, history);
 }
 
 std::ostream& operator<<(std::ostream& os, const Task& task) {
