@@ -12,10 +12,10 @@ MoveTaskToStageCommand::MoveTaskToStageCommand()
 bool MoveTaskToStageCommand::requiresLogin() const { return true; }
 
 void MoveTaskToStageCommand::execute(const std::vector<std::string>& args, AppData& data) {
-    if (data.getCurrentUser()->getRole() != UserRole::TeachingAssistant) {
-        throw JiraInvalidArgumentException("This command is only available for Teaching Assistants.");
+    UserRole role = data.getCurrentUser()->getRole();
+    if (role != UserRole::TeachingAssistant && role != UserRole::Lecturer && role != UserRole::Administrator) {
+        throw JiraInvalidArgumentException("This command is only available for Teaching Assistants and Lecturers.");
     }
-
     if (args.size() != 2) {
         throw JiraInvalidArgumentException("Usage: move-task-to-stage <task_id> <stage_name>");
     }

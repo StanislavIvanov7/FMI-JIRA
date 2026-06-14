@@ -17,8 +17,9 @@ bool ReviewTaskCommand::requiresLogin() const {
 
 void ReviewTaskCommand::execute(const std::vector<std::string>& args, AppData& data) {
     
-    if (data.getCurrentUser()->getRole() != UserRole::TeachingAssistant) {
-        throw JiraInvalidArgumentException("This command is only available for Teaching Assistants.");
+    UserRole role = data.getCurrentUser()->getRole();
+    if (role != UserRole::TeachingAssistant && role != UserRole::Lecturer) {
+        throw JiraInvalidArgumentException("This command is only available for Teaching Assistants and Lecturers.");
     }
 
     if (args.size() != 1) {
