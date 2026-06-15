@@ -18,8 +18,7 @@ public:
     static std::unique_ptr<User> createUser(
         const std::string& username,
         const std::string& password,
-        UserRole role,
-        const std::string& facultyNumber = ""
+        UserRole role
     );
 
     static std::unique_ptr<User> loadUser(
@@ -27,7 +26,6 @@ public:
         const std::string& username,
         const std::string& password,
         UserRole role,
-        const std::string& facultyNumber = "",
         int completedTasks = 0,        
         int inProgressTasks = 0,        
         double performanceScore = 0.0

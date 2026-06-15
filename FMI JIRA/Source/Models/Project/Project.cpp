@@ -149,19 +149,18 @@ void Project::save(std::ostream& os) const {
         << description << "\n"
         << static_cast<int>(status) << "\n";
 
-    // 1. Членове (Username-и)
+
     os << members.size() << "\n";
     for (const auto* member : members) {
         os << member->getUsername() << "\n";
     }
 
-    // 2. Задачи
+
     os << tasks.size() << "\n";
     for (const auto& task : tasks) {
         task->save(os);
     }
 
-    // 3. Етапи
     os << stages.size() << "\n";
     for (const auto& stage : stages) {
         stage.save(os);
@@ -189,12 +188,12 @@ std::unique_ptr<Project> Project::loadSkeleton(std::istream& is, const AppData& 
         project->addMember(context.findUser(uname));
     }
 
-    size_t taskCount;
+ /*   size_t taskCount;
     is >> taskCount;
     is.ignore();
     for (size_t i = 0; i < taskCount; ++i) {
         project->addTask(Task::load(is, context));
-    }
+    }*/
 
     return project;
 }

@@ -15,10 +15,7 @@ bool ListTasksCommand::requiresLogin() const {
 }
 
 void ListTasksCommand::execute(const std::vector<std::string>& args, AppData& data) {
-    if (args.size() != 1) {
-        throw JiraInvalidArgumentException(std::string(CommandConstants::ERR_INVALID_ARGS));
-    }
-
+    
     if (!data.isUserLoggedIn()) {
         throw JiraInvalidArgumentException(std::string(CommandConstants::ERR_NOT_LOGGED_IN));
     }

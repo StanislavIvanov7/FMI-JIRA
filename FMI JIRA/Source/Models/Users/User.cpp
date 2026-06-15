@@ -2,6 +2,7 @@
 #include "Exceptions/JiraInvalidArgumentException.h"
 #include "Utils/Enums/UserRole.h"
 #include "Factories/UserFactory.h"
+#include "Models/Users/Administrator.h"
 size_t User::idCounter = UserConstants::INITIAL_ID_VALUE;
 
 User::User(const std::string& username, const std::string& password, UserRole role)
@@ -97,7 +98,7 @@ std::unique_ptr<User> User::loadPoly(std::istream& is) {
 
     UserRole role = static_cast<UserRole>(roleInt);
 
-    std::unique_ptr<User> user = UserFactory::loadUser(id, username, password, role, "", 0, 0, 0.0);
+    std::unique_ptr<User> user = UserFactory::loadUser(id, username, password, role, 0, 0, 0.0);
 
     if (user) {
         user->loadSubclass(is);

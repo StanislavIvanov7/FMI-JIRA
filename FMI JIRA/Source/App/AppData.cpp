@@ -118,7 +118,10 @@ void AppData::save() const{
 }
 
 void AppData::load() {
-   
+    users.clear();
+    projects.clear();
+
+
     std::ifstream uIn("data/users.txt");
     if (uIn.is_open()) {
         size_t count; uIn >> count; uIn.ignore();
