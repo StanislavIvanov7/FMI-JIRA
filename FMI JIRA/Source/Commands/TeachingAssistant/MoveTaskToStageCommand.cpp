@@ -23,7 +23,6 @@ void MoveTaskToStageCommand::execute(const std::vector<std::string>& args, AppDa
     std::string taskIdStr = args[0];
     std::string stageName = args[1];
     User* currentUser = data.getCurrentUser();
-
     size_t taskId = std::stoul(taskIdStr.substr(taskIdStr.find('-') + 1));
 
     bool taskMoved = false;
@@ -31,23 +30,32 @@ void MoveTaskToStageCommand::execute(const std::vector<std::string>& args, AppDa
     for (const auto& project : data.getProjects()) {
         if (project->hasMember(currentUser->getUsername())) {
 
+           
+            Stage* newStage = project->findStage(stageName);
+            if (!newStage) continue; 
+
+         
             std::shared_ptr<Task> taskToMove = nullptr;
             Stage* oldStage = nullptr;
-            Stage* newStage = nullptr;
 
             for (auto& stage : project->getStages()) {
-                if (stage.getName() == stageName) newStage = &stage;
-
                 auto task = stage.findTask(taskId);
                 if (task) {
                     taskToMove = task;
                     oldStage = &stage;
+                    break;
                 }
             }
 
-            if (taskToMove && newStage) {
-                
-                if (oldStage) oldStage->removeTask(taskId);
+            if (!taskToMove) {
+                taskToMove = project->findTask(taskId);
+            }
+
+           
+            if (taskToMove) {
+                if (oldStage) {
+                    oldStage->removeTask(taskId);
+                }
                 newStage->addTask(taskToMove);
 
                 std::cout << "Task [" << taskIdStr << "] moved to stage [" << stageName << "]." << std::endl;

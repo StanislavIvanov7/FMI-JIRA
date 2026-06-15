@@ -5,19 +5,19 @@ Implement Task class
 Create full Task implementation with all fields
 1
 2
-1
+2
 Ivan
 15 6 2026
 0
 0
-0
+1
 1
 backend
 1
 Ivan
 Started working on the class design
 15 6 2026
-3
+5
 Ivan
 Assignee
 Unassigned
@@ -32,4 +32,14 @@ Ivan
 Tag Added
 
 backend
+15 6 2026
+Maria
+Status
+InProgress
+InReview
+15 6 2026
+Maria
+Approved
+False
+True
 15 6 2026

@@ -41,6 +41,7 @@
 #include "Commands/TeachingAssistant/ReviewTaskCommand.h"
 #include "Commands/TeachingAssistant/StageReportCommand.h"
 #include "Commands/TeachingAssistant/StartStageCommand.h"
+#include "Commands/TeachingAssistant/AddStageCommand.h"
 
 
 Engine::Engine(AppData& data) : data(data) {
@@ -84,6 +85,7 @@ Engine::Engine(AppData& data) : data(data) {
     commands.push_back(std::make_unique<ReviewTaskCommand>());
     commands.push_back(std::make_unique<StageReportCommand>());
     commands.push_back(std::make_unique<StartStageCommand>());
+    commands.push_back(std::make_unique<AddStageCommand>());
     
 }
 
