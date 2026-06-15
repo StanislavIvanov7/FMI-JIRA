@@ -25,10 +25,6 @@ void ArchiveProjectCommand::execute(const std::vector<std::string>& args, AppDat
     for (const auto& project : data.getProjects()) {
         if (project->getName() == projectName) {
 
-            if (project->getStatus() == ProjectStatus::Finished) {
-                throw JiraInvalidArgumentException("Project is already finished/archived.");
-            }
-
             project->archive();
 
             std::cout << "Project [" << projectName << "] archived successfully." << std::endl;
